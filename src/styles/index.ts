@@ -1,4 +1,5 @@
 import { createGlobalStyle, styled } from 'styled-components'
+import variables from './variables'
 
 const EstiloGlobal = createGlobalStyle`
   * {
@@ -8,11 +9,13 @@ const EstiloGlobal = createGlobalStyle`
     font-family: Roboto, sans-serif;
     list-style: none;
     text-decoration: none;
+    color: ${variables.beige};
   }
 `
 export const Container = styled.div`
   display: grid;
   grid-template-columns: 224px auto;
+  background-color: ${variables.purple};
 `
 export const MainContainer = styled.main`
   padding: 0 40px;

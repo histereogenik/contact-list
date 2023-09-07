@@ -2,13 +2,19 @@ import { Provider } from 'react-redux'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import EstiloGlobal, { Container } from './styles'
+import Sidebar from './containers/Sidebar'
+import store from './store'
+import ContactList from './containers/ContactList'
 
 function App() {
   return (
-    <>
+    <Provider store={store}>
       <EstiloGlobal />
-      <Container> </Container>
-    </>
+      <Container>
+        <Sidebar />
+        <ContactList />
+      </Container>
+    </Provider>
   )
 }
 
