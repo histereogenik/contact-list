@@ -1,6 +1,7 @@
 export default {
-  beige: '#E7AB79',
-  purple: '#4C3A51',
-  wine: '#774360',
-  pink: '#B25068'
+  white: '#fff',
+  lightGray: 'rgb(241,243,255)',
+  gray: '#5f6368',
+  darkGray: '#212121',
+  black: 'rgb(32,33,36)'
 }

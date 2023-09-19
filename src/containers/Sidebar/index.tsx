@@ -10,10 +10,15 @@ const Sidebar = () => {
   return (
     <S.Aside>
       <div>
-        <Icon.PersonCircle /> Contacts
-        <button>
-          <Icon.PersonFillAdd /> Create contact
-        </button>
+        <S.AppName>
+          <Icon.ColumnsGap /> <span>Contacts</span>
+        </S.AppName>
+        <S.AddContact>
+          <div>
+            <Icon.PersonFillAdd className="custom-icon" />{' '}
+            <span>Create contact</span>
+          </div>
+        </S.AddContact>
         <S.Filters>
           <FilterCard />
           <FilterCard />

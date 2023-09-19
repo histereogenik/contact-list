@@ -6,16 +6,15 @@ const EstiloGlobal = createGlobalStyle`
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: Roboto, sans-serif;
     list-style: none;
     text-decoration: none;
-    color: ${variables.beige};
+    font-family: Roboto, sans-serif;
   }
 `
 export const Container = styled.div`
   display: grid;
   grid-template-columns: 224px auto;
-  background-color: ${variables.purple};
+  background-color: ${variables.white};
 `
 export const MainContainer = styled.main`
   padding: 0 40px;
