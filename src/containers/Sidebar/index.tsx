@@ -21,7 +21,7 @@ const Sidebar = () => {
         </S.AddContact>
         <S.Filters>
           <FilterCard label="Contacts" counter={4} />
-          <FilterCard label="Important" counter={4} />
+          <FilterCard label="Favorites" counter={4} />
           <FilterCard label="Work" counter={4} />
           <FilterCard label="Family" counter={4} active />
         </S.Filters>
