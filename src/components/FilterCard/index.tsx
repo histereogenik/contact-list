@@ -2,16 +2,18 @@ import * as S from './styles'
 import * as Icon from 'react-bootstrap-icons'
 
 export type Props = {
-  ativo?: boolean
+  active?: boolean
+  counter: number
+  label: string
 }
 
-const FilterCard = (props: Props) => (
-  <S.Card ativo={props.ativo}>
+const FilterCard = ({ active, counter, label }: Props) => (
+  <S.Card active={active}>
     <div>
       <Icon.PersonFill />
-      <S.Label>Contacts</S.Label>
+      <S.Label>{label}</S.Label>
     </div>
-    <S.Counter>50</S.Counter>
+    <S.Counter>{counter}</S.Counter>
   </S.Card>
 )
 

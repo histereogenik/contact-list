@@ -3,7 +3,9 @@ import styled from 'styled-components'
 import variables from '../../styles/variables'
 import { Props } from '.'
 
-export const Card = styled.div<Props>`
+type ActiveProp = Omit<Props, 'counter' | 'label'>
+
+export const Card = styled.div<ActiveProp>`
   padding: 8px;
   font-weight: bold;
   font-size: 14px;
@@ -12,7 +14,7 @@ export const Card = styled.div<Props>`
   align-items: center;
   border-radius: 16px;
   background-color: ${(props) =>
-    props.ativo ? variables.lightGray : variables.white};
+    props.active ? variables.lightGray : variables.white};
   div {
     display: flex;
     align-items: center;
