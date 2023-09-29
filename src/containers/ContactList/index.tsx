@@ -18,7 +18,7 @@ const ContactList = () => {
             <th>Phone Number</th>
             <th>E-mail</th>
             <th>Favorite</th>
-            <th>Edit</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>

@@ -49,13 +49,6 @@ export const Table = styled.table`
   td {
     padding: 8px 0;
 
-    label {
-      cursor: pointer;
-      font-size: 24px;
-      margin-left: 20px;
-      user-select: none;
-    }
-
     input {
       margin-left: 8px;
     }
