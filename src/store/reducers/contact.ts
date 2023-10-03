@@ -1,38 +1,50 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
 import ContactClass from '../../models/ContactClass'
+
 import * as enums from '../../utils/enums/LabelEnum'
+
+type ContactsState = {
+  items: ContactClass[]
+}
+
+const initialState: ContactsState = {
+  items: [
+    {
+      contactName: 'Humberto',
+      contactNumber: 3996966897,
+      contactEmail: 'huncberth@gogomail.com',
+      label: enums.LabelEnum.FAMILY,
+      favorite: true,
+      id: 1
+    },
+    {
+      contactName: 'Algor',
+      contactNumber: 3996999897,
+      contactEmail: 'huncberth@gogomail.com',
+      label: enums.LabelEnum.WORK,
+      favorite: false,
+      id: 2
+    },
+    {
+      contactName: 'Shurima',
+      contactNumber: 39999966897,
+      contactEmail: 'huncberth@gogomail.com',
+      label: enums.LabelEnum.ANY,
+      favorite: true,
+      id: 3
+    }
+  ]
+}
 
 const contactsSlice = createSlice({
   name: 'contacts',
-  initialState: [
-    new ContactClass(
-      'Humberto',
-      3996966897,
-      'huncberth@gogomail.com',
-      enums.LabelEnum.FAMILY,
-      true,
-      1
-    ),
-    new ContactClass(
-      'Algor',
-      3996999897,
-      'huncberth@gogomail.com',
-      enums.LabelEnum.WORK,
-      true,
-      2
-    ),
-    new ContactClass(
-      'Shurima',
-      39999966897,
-      'huncberth@gogomail.com',
-      enums.LabelEnum.ANY,
-      true,
-      3
-    )
-  ],
+  initialState,
   reducers: {
     deleteContact: (state, action: PayloadAction<number>) => {
-      state = state.filter((contact) => contact.id !== action.payload)
+      state.items = state.items.filter(
+        (contact) => contact.id !== action.payload
+      )
     }
   }
 })

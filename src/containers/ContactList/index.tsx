@@ -9,7 +9,7 @@ import * as Icon from 'react-bootstrap-icons'
 
 const ContactList = () => {
   const dispatch = useDispatch()
-  const { contacts } = useSelector((state: RootReducer) => state)
+  const { items } = useSelector((state: RootReducer) => state.contacts)
 
   const searchIcon = <Icon.Search />
 
@@ -35,7 +35,7 @@ const ContactList = () => {
           </tr>
         </thead>
         <tbody>
-          {contacts.map((contact) => (
+          {items.map((contact) => (
             <SavedContact
               key={contact.contactNumber}
               contactName={contact.contactName}

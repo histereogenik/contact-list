@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import * as Icon from 'react-bootstrap-icons'
 
+import * as Icon from 'react-bootstrap-icons'
 import * as S from './styles'
 import ModalDelete from '../ModalDelete'
 
