@@ -1,20 +1,29 @@
-import { Button, Modal } from 'react-bootstrap'
-import { useDispatch } from 'react-redux'
+import { Button, Modal, ModalProps } from 'react-bootstrap'
 
-import { closeModal as cancel } from '../../store/reducers/modal'
+import { DetailedHTMLProps, HTMLAttributes, RefObject, ReactNode } from 'react'
+import { Omit, BsPrefixProps } from 'react-bootstrap/esm/helpers'
+import { ItalicP } from './styles'
 
-export type Props = {
-  closeModal: () => void
-}
-
-const ModalDelete = ({ closeModal }: Props) => {
-  const dispatch = useDispatch()
-
-  const handleCloseModal = () => {
-    dispatch(cancel())
-  }
+function ModalDelete(
+  props: JSX.IntrinsicAttributes &
+    Omit<
+      Omit<
+        DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
+        'ref'
+      > & {
+        ref?:
+          | ((instance: HTMLDivElement | null) => void)
+          | RefObject<HTMLDivElement>
+          | null
+          | undefined
+      },
+      BsPrefixProps<'div'> & ModalProps
+    > &
+    BsPrefixProps<'div'> &
+    ModalProps & { children?: ReactNode }
+) {
   return (
-    <Modal size="sm" aria-labelledby="contained-modal-title-vcenter" centered>
+    <Modal {...props} aria-labelledby="contained-modal-title-vcenter" centered>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           Deleting Contact
@@ -22,13 +31,13 @@ const ModalDelete = ({ closeModal }: Props) => {
       </Modal.Header>
       <Modal.Body>
         <p>Are you sure you want to delete this contact?</p>{' '}
-        <p>*This action is irreversible</p>
+        <ItalicP>*This action is irreversible</ItalicP>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleCloseModal}>
+        <Button variant="secondary" onClick={props.onHide}>
           Cancel
         </Button>
-        <Button variant="danger" onClick={handleCloseModal}>
+        <Button variant="danger" onClick={props.onHide}>
           Delete
         </Button>
       </Modal.Footer>

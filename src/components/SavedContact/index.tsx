@@ -1,28 +1,23 @@
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import * as Icon from 'react-bootstrap-icons'
 
 import * as S from './styles'
 import ModalDelete from '../ModalDelete'
 
-import { closeModal, openModal } from '../../store/reducers/modal'
-import { RootReducer } from '../../store'
-
 const SavedContact = () => {
   const [isFavorite, setIsFavorite] = useState(false)
-  const dispatch = useDispatch()
-  const { showModal } = useSelector((state: RootReducer) => state.modal)
+  const [modalShow, setModalShow] = useState(false)
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite)
   }
 
   const handleOpenModal = () => {
-    dispatch(openModal())
+    setModalShow(true)
   }
 
   const handleCloseModal = () => {
-    dispatch(closeModal())
+    setModalShow(false)
   }
 
   return (
@@ -43,7 +38,8 @@ const SavedContact = () => {
           <S.ButtonDelete type="button" onClick={handleOpenModal}>
             <Icon.Trash3 />
           </S.ButtonDelete>
-          {showModal && <ModalDelete closeModal={handleCloseModal} />}
+
+          <ModalDelete show={modalShow} onHide={handleCloseModal} />
         </td>
       </tr>
     </>
