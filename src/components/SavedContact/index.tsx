@@ -4,7 +4,11 @@ import * as Icon from 'react-bootstrap-icons'
 import * as S from './styles'
 import ModalDelete from '../ModalDelete'
 
-const SavedContact = () => {
+type Props = {
+  onDelete: () => void
+}
+
+const SavedContact = ({ onDelete }: Props) => {
   const [isFavorite, setIsFavorite] = useState(false)
   const [modalShow, setModalShow] = useState(false)
 
@@ -39,7 +43,11 @@ const SavedContact = () => {
             <Icon.Trash3 />
           </S.ButtonDelete>
 
-          <ModalDelete show={modalShow} onHide={handleCloseModal} />
+          <ModalDelete
+            show={modalShow}
+            onHide={handleCloseModal}
+            onDelete={onDelete}
+          />
         </td>
       </tr>
     </>

@@ -1,29 +1,27 @@
 import { Button, Modal, ModalProps } from 'react-bootstrap'
 
-import { DetailedHTMLProps, HTMLAttributes, RefObject, ReactNode } from 'react'
-import { Omit, BsPrefixProps } from 'react-bootstrap/esm/helpers'
 import { ItalicP } from './styles'
 
-function ModalDelete(
-  props: JSX.IntrinsicAttributes &
-    Omit<
-      Omit<
-        DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
-        'ref'
-      > & {
-        ref?:
-          | ((instance: HTMLDivElement | null) => void)
-          | RefObject<HTMLDivElement>
-          | null
-          | undefined
-      },
-      BsPrefixProps<'div'> & ModalProps
-    > &
-    BsPrefixProps<'div'> &
-    ModalProps & { children?: ReactNode }
-) {
+type ModalDeleteProps = {
+  onHide: () => void
+  onDelete: () => void
+}
+
+const ModalDelete: React.FC<ModalProps & ModalDeleteProps> = ({
+  onHide,
+  onDelete,
+  ...modalProps
+}) => {
+  const handleDelete = () => {
+    onDelete()
+    onHide()
+  }
   return (
-    <Modal {...props} aria-labelledby="contained-modal-title-vcenter" centered>
+    <Modal
+      {...modalProps}
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           Deleting Contact
@@ -34,10 +32,10 @@ function ModalDelete(
         <ItalicP>*This action is irreversible</ItalicP>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={props.onHide}>
+        <Button variant="secondary" onClick={onHide}>
           Cancel
         </Button>
-        <Button variant="danger" onClick={props.onHide}>
+        <Button variant="danger" onClick={handleDelete}>
           Delete
         </Button>
       </Modal.Footer>
