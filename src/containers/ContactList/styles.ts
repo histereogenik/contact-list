@@ -1,10 +1,14 @@
 import styled from 'styled-components'
 import variables from '../../styles/variables'
 
+export const MainContainer = styled.main`
+  height: 100vh;
+  overflow-y: scroll;
+`
 export const SearchContainer = styled.div`
   display: flex;
   align-items: flex-start;
-  padding: 8px;
+  padding: 8px 0;
   height: 64px;
 `
 export const SearchIcon = styled.button`

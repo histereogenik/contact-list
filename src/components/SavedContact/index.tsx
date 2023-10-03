@@ -4,11 +4,23 @@ import * as Icon from 'react-bootstrap-icons'
 import * as S from './styles'
 import ModalDelete from '../ModalDelete'
 
+import * as enums from '../../utils/enums/LabelEnum'
+
 type Props = {
   onDelete: () => void
+  contactName: string
+  contactNumber: number
+  contactEmail: string
+  label: enums.LabelEnum
+  favorite: boolean
 }
 
-const SavedContact = ({ onDelete }: Props) => {
+const SavedContact = ({
+  onDelete,
+  contactName,
+  contactEmail,
+  contactNumber
+}: Props) => {
   const [isFavorite, setIsFavorite] = useState(false)
   const [modalShow, setModalShow] = useState(false)
 
@@ -27,9 +39,9 @@ const SavedContact = ({ onDelete }: Props) => {
   return (
     <>
       <tr>
-        <td>Gatinha do tinder so vem</td>
-        <td>99999999</td>
-        <td>gogo@emais.com</td>
+        <td>{contactName}</td>
+        <td>{contactNumber}</td>
+        <td>{contactEmail}</td>
         <td>
           <S.FavoriteButton
             className={isFavorite ? 'star-filled' : ''}

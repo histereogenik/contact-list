@@ -4,7 +4,7 @@ import * as Icon from 'react-bootstrap-icons'
 export type Props = {
   active?: boolean
   counter: number
-  label: string
+  label?: string
 }
 
 const FilterCard = ({ active, counter, label }: Props) => (

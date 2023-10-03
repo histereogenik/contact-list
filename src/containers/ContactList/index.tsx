@@ -5,22 +5,21 @@ import { RootReducer } from '../../store'
 
 import SavedContact from '../../components/SavedContact'
 import * as S from './styles'
-
 import * as Icon from 'react-bootstrap-icons'
 
 const ContactList = () => {
   const dispatch = useDispatch()
-  const contacts = useSelector((state: RootReducer) => state.contacts.contacts)
+  const { contacts } = useSelector((state: RootReducer) => state)
 
   const searchIcon = <Icon.Search />
 
-  const testDelete = () => console.log('deleted')
+  const testeDelete = () => console.log('deleted!')
   const handleDeleteContact = (contactID: number) => {
     dispatch(deleteContact(contactID))
   }
 
   return (
-    <main>
+    <S.MainContainer>
       <S.SearchContainer>
         <S.SearchIcon>{searchIcon}</S.SearchIcon>
         <S.Search type="text" placeholder="Search"></S.Search>
@@ -36,16 +35,20 @@ const ContactList = () => {
           </tr>
         </thead>
         <tbody>
-          <SavedContact onDelete={() => testDelete()} />
           {contacts.map((contact) => (
             <SavedContact
-              key={contact.id}
+              key={contact.contactNumber}
+              contactName={contact.contactName}
+              contactNumber={contact.contactNumber}
+              contactEmail={contact.contactEmail}
+              label={contact.label}
+              favorite={contact.favorite}
               onDelete={() => handleDeleteContact(contact.id)}
             />
           ))}
         </tbody>
       </S.Table>
-    </main>
+    </S.MainContainer>
   )
 }
 export default ContactList
