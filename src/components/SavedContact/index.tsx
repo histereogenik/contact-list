@@ -5,6 +5,7 @@ import * as S from './styles'
 import ModalDelete from '../ModalDelete'
 
 import * as enums from '../../utils/enums/LabelEnum'
+import ModalEdit from '../ModalEdit'
 
 type Props = {
   onDelete: () => void
@@ -13,55 +14,84 @@ type Props = {
   contactEmail: string
   label: enums.LabelEnum
   favorite: boolean
+  id: number
 }
 
 const SavedContact = ({
   onDelete,
   contactName,
   contactEmail,
-  contactNumber
+  contactNumber,
+  label,
+  favorite,
+  id
 }: Props) => {
   const [isFavorite, setIsFavorite] = useState(false)
-  const [modalShow, setModalShow] = useState(false)
+  const [modalDeleteShow, setModalDeleteShow] = useState(false)
+  const [modalEditShow, setModalEditShow] = useState(false)
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite)
   }
 
-  const handleOpenModal = () => {
-    setModalShow(true)
+  const handleOpenModalDelete = () => {
+    setModalDeleteShow(true)
   }
 
-  const handleCloseModal = () => {
-    setModalShow(false)
+  const handleCloseModalDelete = () => {
+    setModalDeleteShow(false)
+  }
+
+  const handleOpenModalEdit = () => {
+    setModalEditShow(true)
+  }
+
+  const handleCloseModalEdit = () => {
+    setModalEditShow(false)
   }
 
   return (
     <>
-      <tr>
-        <td>{contactName}</td>
+      <S.ContactContainer>
+        <td className="name-padding">{contactName}</td>
         <td>{contactNumber}</td>
         <td>{contactEmail}</td>
         <td>
-          <S.FavoriteButton
-            className={isFavorite ? 'star-filled' : ''}
-            onClick={toggleFavorite}
-          >
-            {isFavorite ? '★' : '☆'}
-          </S.FavoriteButton>
-        </td>
-        <td>
-          <S.ButtonDelete type="button" onClick={handleOpenModal}>
-            <Icon.Trash3 />
-          </S.ButtonDelete>
+          <S.ManagerContainer>
+            <S.FavoriteButton
+              className={isFavorite ? 'star-filled' : ''}
+              onClick={toggleFavorite}
+            >
+              {isFavorite ? '★' : '☆'}
+            </S.FavoriteButton>
 
-          <ModalDelete
-            show={modalShow}
-            onHide={handleCloseModal}
-            onDelete={onDelete}
-          />
+            <S.ManagerButton type="button" onClick={handleOpenModalEdit}>
+              <Icon.Pencil />
+            </S.ManagerButton>
+
+            <ModalEdit
+              show={modalEditShow}
+              onHide={handleCloseModalEdit}
+              contactName={contactName}
+              contactEmail={contactEmail}
+              contactNumber={contactNumber}
+              label={label}
+              favorite={favorite}
+              id={id}
+            />
+
+            <S.ManagerButton type="button" onClick={handleOpenModalDelete}>
+              <Icon.Trash3 />
+            </S.ManagerButton>
+
+            <ModalDelete
+              show={modalDeleteShow}
+              onHide={handleCloseModalDelete}
+              onDelete={onDelete}
+            />
+          </S.ManagerContainer>
         </td>
-      </tr>
+      </S.ContactContainer>
     </>
   )
 }

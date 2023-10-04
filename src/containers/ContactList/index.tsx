@@ -30,8 +30,7 @@ const ContactList = () => {
             <th>Name</th>
             <th>Phone Number</th>
             <th>E-mail</th>
-            <th>Favorite</th>
-            <th>Delete</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -43,6 +42,7 @@ const ContactList = () => {
               contactEmail={contact.contactEmail}
               label={contact.label}
               favorite={contact.favorite}
+              id={contact.id}
               onDelete={() => handleDeleteContact(contact.id)}
             />
           ))}
