@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { Button, Modal, ModalProps, Form, InputGroup } from 'react-bootstrap'
+import { Button, Modal, ModalProps, Form } from 'react-bootstrap'
 
 import { editContact } from '../../store/reducers/contact'
 import * as enums from '../../utils/enums/LabelEnum'
 import ContactClass from '../../models/ContactClass'
+import { LabelContainer, MyForm } from './styles'
 
 type ModalEditProps = {
   onHide: () => void
@@ -77,7 +78,7 @@ const ModalEdit: React.FC<ModalProps & ModalEditProps> = ({
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form>
+        <MyForm>
           <Form.Group className="mb-3" controlId="contactName">
             <Form.Label>Name</Form.Label>
             <Form.Control
@@ -105,21 +106,36 @@ const ModalEdit: React.FC<ModalProps & ModalEditProps> = ({
               onChange={(e) => setNewEmail(e.target.value)}
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="label">
-            <Form.Label>Label</Form.Label>
-            <Form.Check
-              type="checkbox"
-              label="Family"
-              checked={newLabel === enums.LabelEnum.FAMILY}
-              onChange={() => setNewLabel(enums.LabelEnum.FAMILY)}
-            />
-            <Form.Check
-              type="checkbox"
-              label="Work"
-              checked={newLabel === enums.LabelEnum.WORK}
-              onChange={() => setNewLabel(enums.LabelEnum.WORK)}
-            />
-          </Form.Group>
+          <LabelContainer>
+            <Form.Group className="mb-3" controlId="family">
+              <Form.Check
+                type="checkbox"
+                label="Family"
+                checked={newLabel === enums.LabelEnum.FAMILY}
+                onChange={() =>
+                  setNewLabel(
+                    newLabel === enums.LabelEnum.FAMILY
+                      ? enums.LabelEnum.ANY
+                      : enums.LabelEnum.FAMILY
+                  )
+                }
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="work">
+              <Form.Check
+                type="checkbox"
+                label="Work"
+                checked={newLabel === enums.LabelEnum.WORK}
+                onChange={() =>
+                  setNewLabel(
+                    newLabel === enums.LabelEnum.WORK
+                      ? enums.LabelEnum.ANY
+                      : enums.LabelEnum.WORK
+                  )
+                }
+              />
+            </Form.Group>
+          </LabelContainer>
           <Form.Group className="mb-3" controlId="favorite">
             <Form.Check
               type="checkbox"
@@ -128,7 +144,7 @@ const ModalEdit: React.FC<ModalProps & ModalEditProps> = ({
               onChange={() => setNewFavorite(!newFavorite)}
             />
           </Form.Group>
-        </Form>
+        </MyForm>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={onHide}>
