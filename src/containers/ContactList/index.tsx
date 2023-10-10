@@ -20,6 +20,12 @@ const ContactList = () => {
     dispatch(deleteContact(contactID))
   }
 
+  const filterContacts = () => {
+    return items.filter(
+      (item) => item.contactName.toLowerCase().search(term.toLowerCase()) >= 0
+    )
+  }
+
   return (
     <S.MainContainer>
       <S.SearchContainer>
@@ -31,8 +37,7 @@ const ContactList = () => {
           onChange={(e) => dispatch(changeTerm(e.target.value))}
         ></S.Search>
       </S.SearchContainer>
-      <S.Table cellSpacing={8}>
-        <span> &quot;{term}&ldquo;</span>
+      <S.Table hover>
         <thead>
           <tr>
             <th>Name</th>
@@ -42,7 +47,7 @@ const ContactList = () => {
           </tr>
         </thead>
         <tbody>
-          {items.map((contact) => (
+          {filterContacts().map((contact) => (
             <SavedContact
               key={contact.contactNumber}
               contactName={contact.contactName}

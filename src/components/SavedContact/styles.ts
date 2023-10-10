@@ -2,16 +2,9 @@ import styled from 'styled-components'
 import variables from '../../styles/variables'
 
 export const ContactContainer = styled.tr`
-  &:hover {
-    background: ${variables.lightGray};
-  }
-
   td {
     padding: 8px 0;
-
-    input {
-      margin-left: 8px;
-    }
+    vertical-align: middle;
   }
 
   .name-padding {

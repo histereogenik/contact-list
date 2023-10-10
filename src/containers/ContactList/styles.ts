@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import variables from '../../styles/variables'
+import { Table as ReactTable } from 'react-bootstrap'
 
 export const MainContainer = styled.main`
   height: 100vh;
@@ -35,10 +36,9 @@ export const Search = styled.input`
     outline: none;
   }
 `
-export const Table = styled.table`
+export const Table = styled(ReactTable)`
   text-wrap: nowrap;
-  padding: 16px;
-  width: 90%;
+  width: 95%;
   text-align: left;
 
   thead {
@@ -47,6 +47,5 @@ export const Table = styled.table`
 
   th {
     padding: 4px 0;
-    border-bottom: 1px solid ${variables.lightGray};
   }
 `
