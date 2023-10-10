@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { Button, Modal, ModalProps, Form } from 'react-bootstrap'
-
 import { editContact } from '../../store/reducers/contact'
+
 import * as enums from '../../utils/enums/LabelEnum'
 import ContactClass from '../../models/ContactClass'
+
+import { Button, Modal, ModalProps, Form } from 'react-bootstrap'
 import { LabelContainer, MyForm } from './styles'
 
 type ModalEditProps = {
@@ -13,7 +14,7 @@ type ModalEditProps = {
   contactName: string
   contactNumber: number
   contactEmail: string
-  label: enums.LabelEnum
+  label: string
   favorite: boolean
   id: number
 }
@@ -28,12 +29,12 @@ const ModalEdit: React.FC<ModalProps & ModalEditProps> = ({
   id,
   ...modalProps
 }) => {
+  const dispatch = useDispatch()
   const [newName, setNewName] = useState(contactName)
   const [newNumber, setNewNumber] = useState(contactNumber.toString())
   const [newEmail, setNewEmail] = useState(contactEmail)
   const [newLabel, setNewLabel] = useState(label)
   const [newFavorite, setNewFavorite] = useState(favorite)
-  const dispatch = useDispatch()
 
   useEffect(() => {
     if (!modalProps.show) {

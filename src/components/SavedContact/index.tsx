@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+
+import { toggleFavorite } from '../../store/reducers/contact'
 
 import * as Icon from 'react-bootstrap-icons'
 import * as S from './styles'
 import ModalDelete from '../ModalDelete'
-
-import * as enums from '../../utils/enums/LabelEnum'
 import ModalEdit from '../ModalEdit'
 
 type Props = {
@@ -12,7 +13,7 @@ type Props = {
   contactName: string
   contactNumber: number
   contactEmail: string
-  label: enums.LabelEnum
+  label: string
   favorite: boolean
   id: number
 }
@@ -26,13 +27,22 @@ const SavedContact = ({
   favorite,
   id
 }: Props) => {
-  const [isFavorite, setIsFavorite] = useState(false)
+  const [isFavorite, setIsFavorite] = useState(favorite)
   const [modalDeleteShow, setModalDeleteShow] = useState(false)
   const [modalEditShow, setModalEditShow] = useState(false)
 
-  const toggleFavorite = () => {
-    setIsFavorite(!isFavorite)
+  const dispatch = useDispatch()
+
+  const toggleFavoriteHandler = () => {
+    const newFavStatus = !isFavorite
+    setIsFavorite(newFavStatus)
+    dispatch(toggleFavorite(id))
+    console.log(favorite)
   }
+
+  useEffect(() => {
+    setIsFavorite(favorite)
+  }, [favorite])
 
   const handleOpenModalDelete = () => {
     setModalDeleteShow(true)
@@ -60,7 +70,7 @@ const SavedContact = ({
           <S.ManagerContainer>
             <S.FavoriteButton
               className={isFavorite ? 'star-filled' : ''}
-              onClick={toggleFavorite}
+              onClick={toggleFavoriteHandler}
             >
               {isFavorite ? '★' : '☆'}
             </S.FavoriteButton>

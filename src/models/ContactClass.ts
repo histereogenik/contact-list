@@ -1,10 +1,8 @@
-import * as enums from '../utils/enums/LabelEnum'
-
 class ContactClass {
   contactName: string
   contactNumber: number
   contactEmail: string
-  label: enums.LabelEnum
+  label: string
   favorite: boolean
   id: number
 
@@ -12,7 +10,7 @@ class ContactClass {
     contactName: string,
     contactNumber: number,
     contactEmail: string,
-    label: enums.LabelEnum,
+    label: string,
     favorite: boolean,
     id: number
   ) {

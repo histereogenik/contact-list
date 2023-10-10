@@ -14,7 +14,7 @@ const initialState: ContactsState = {
       contactName: 'Humberto',
       contactNumber: 3996966897,
       contactEmail: 'huncberth@gogomail.com',
-      label: enums.LabelEnum.FAMILY,
+      label: enums.LabelEnum.FAMILY.toString(),
       favorite: true,
       id: 1
     },
@@ -22,7 +22,7 @@ const initialState: ContactsState = {
       contactName: 'Algor',
       contactNumber: 3996999897,
       contactEmail: 'huncberth@gogomail.com',
-      label: enums.LabelEnum.WORK,
+      label: enums.LabelEnum.WORK.toString(),
       favorite: false,
       id: 2
     },
@@ -30,7 +30,7 @@ const initialState: ContactsState = {
       contactName: 'Shurima',
       contactNumber: 39999966897,
       contactEmail: 'huncberth@gogomail.com',
-      label: enums.LabelEnum.ANY,
+      label: enums.LabelEnum.ANY.toString(),
       favorite: true,
       id: 3
     }
@@ -54,10 +54,16 @@ const contactsSlice = createSlice({
       if (contactIndex >= 0) {
         state.items[contactIndex] = action.payload
       }
+    },
+    toggleFavorite: (state, action: PayloadAction<number>) => {
+      state.items = state.items.map((c) =>
+        c.id === action.payload ? { ...c, favorite: !c.favorite } : c
+      )
     }
   }
 })
 
-export const { deleteContact, editContact } = contactsSlice.actions
+export const { deleteContact, editContact, toggleFavorite } =
+  contactsSlice.actions
 
 export default contactsSlice.reducer
