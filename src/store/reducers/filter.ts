@@ -19,9 +19,13 @@ const filterSlice = createSlice({
   reducers: {
     changeTerm: (state, action: PayloadAction<string>) => {
       state.term = action.payload
+    },
+    changeFilter: (state, action: PayloadAction<FilterState>) => {
+      state.criteria = action.payload.criteria
+      state.value = action.payload.value
     }
   }
 })
 
-export const { changeTerm } = filterSlice.actions
+export const { changeTerm, changeFilter } = filterSlice.actions
 export default filterSlice.reducer
