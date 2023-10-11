@@ -95,10 +95,14 @@ const ModalCreate: React.FC<ModalProps & ModalCreateProps> = ({
           <Form.Group className="mb-3" controlId="contactNumber">
             <Form.Label>Phone Number</Form.Label>
             <Form.Control
-              type="text"
+              type="tel"
+              maxLength={15}
               placeholder="Enter phone number"
               value={newNumber}
-              onChange={(e) => setNewNumber(e.target.value)}
+              onChange={(e) => {
+                const numericValue = e.target.value.replace(/\D/g, '')
+                setNewNumber(numericValue)
+              }}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="contactEmail">
