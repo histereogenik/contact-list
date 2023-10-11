@@ -1,6 +1,6 @@
 export enum LabelEnum {
   ANY = '',
-  FAVORITE = 'favorite',
+  FAVORITE = 'true',
   WORK = 'work',
   FAMILY = 'family'
 }

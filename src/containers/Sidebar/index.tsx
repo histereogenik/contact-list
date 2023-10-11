@@ -22,25 +22,21 @@ const Sidebar = () => {
             value={enums.LabelEnum.ANY}
             criteria="all"
             label="Contacts"
-            counter={4}
           />
           <FilterCard
             value={enums.LabelEnum.FAVORITE}
             criteria="favorite"
             label="Favorites"
-            counter={4}
           />
           <FilterCard
             value={enums.LabelEnum.WORK}
             criteria="label"
             label="Work"
-            counter={4}
           />
           <FilterCard
             value={enums.LabelEnum.FAMILY}
             criteria="label"
             label="Family"
-            counter={4}
           />
         </S.Filters>
       </div>

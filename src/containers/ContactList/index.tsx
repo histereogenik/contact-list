@@ -17,7 +17,6 @@ const ContactList = () => {
 
   const searchIcon = <Icon.Search />
 
-  const testeDelete = () => console.log('deleted!')
   const handleDeleteContact = (contactID: number) => {
     dispatch(deleteContact(contactID))
   }
@@ -25,7 +24,7 @@ const ContactList = () => {
   const searchFilterContacts = () => {
     let filteredContacts = items
 
-    if (term) {
+    if (term !== undefined) {
       filteredContacts = filteredContacts.filter((item) => {
         const lowerTerm = term.toLowerCase()
         return (
@@ -37,7 +36,7 @@ const ContactList = () => {
 
       if (criteria === 'favorite') {
         filteredContacts = filteredContacts.filter(
-          (item) => item.favorite === value
+          (item) => item.favorite.toString() === value
         )
       } else if (criteria === 'label') {
         filteredContacts = filteredContacts.filter(
@@ -61,11 +60,6 @@ const ContactList = () => {
           onChange={(e) => dispatch(changeTerm(e.target.value))}
         ></S.Search>
       </S.SearchContainer>
-      <ul>
-        <li>{term}</li>
-        <li>{criteria}</li>
-        <li>{value}</li>
-      </ul>
       <S.Table hover>
         <thead>
           <tr>

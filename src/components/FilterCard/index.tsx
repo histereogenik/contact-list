@@ -9,21 +9,31 @@ import * as Icon from 'react-bootstrap-icons'
 import { RootReducer } from '../../store'
 
 export type Props = {
-  counter: number
   label?: string
   criteria: 'label' | 'favorite' | 'all'
-  value: enums.LabelEnum
+  value: enums.LabelEnum | boolean
 }
 
-const FilterCard = ({ counter, label, criteria, value }: Props) => {
+const FilterCard = ({ label, criteria, value }: Props) => {
   const dispatch = useDispatch()
-  const { filter } = useSelector((state: RootReducer) => state)
+  const { filter, contacts } = useSelector((state: RootReducer) => state)
 
   const verifyIfActive = () => {
     const sameCriteria = filter.criteria === criteria
     const sameValue = filter.value === value
 
     return sameCriteria && sameValue
+  }
+
+  const countContacts = () => {
+    if (criteria === 'all') return contacts.items.length
+    if (criteria === 'favorite') {
+      return contacts.items.filter((item) => item.favorite.toString() === value)
+        .length
+    }
+    if (criteria === 'label') {
+      return contacts.items.filter((item) => item.label === value).length
+    }
   }
 
   const filterContacts = () => {
@@ -34,6 +44,8 @@ const FilterCard = ({ counter, label, criteria, value }: Props) => {
       })
     )
   }
+
+  const counterHandler = countContacts()
   const isActive = verifyIfActive()
 
   return (
@@ -42,7 +54,7 @@ const FilterCard = ({ counter, label, criteria, value }: Props) => {
         <Icon.PersonFill />
         <S.Label>{label}</S.Label>
       </div>
-      <S.Counter>{counter}</S.Counter>
+      <S.Counter>{counterHandler}</S.Counter>
     </S.Card>
   )
 }
