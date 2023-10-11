@@ -21,7 +21,7 @@ const initialState: ContactsState = {
     {
       contactName: 'Algor',
       contactNumber: 3996999897,
-      contactEmail: 'huncberth@gogomail.com',
+      contactEmail: 'algazes@gogomail.com',
       label: enums.LabelEnum.WORK.toString(),
       favorite: false,
       id: 2
@@ -29,7 +29,7 @@ const initialState: ContactsState = {
     {
       contactName: 'Shurima',
       contactNumber: 39999966897,
-      contactEmail: 'huncberth@gogomail.com',
+      contactEmail: 'azirmylord@gogomail.com',
       label: enums.LabelEnum.ANY.toString(),
       favorite: true,
       id: 3

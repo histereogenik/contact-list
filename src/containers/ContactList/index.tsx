@@ -21,9 +21,14 @@ const ContactList = () => {
   }
 
   const filterContacts = () => {
-    return items.filter(
-      (item) => item.contactName.toLowerCase().search(term.toLowerCase()) >= 0
-    )
+    return items.filter((item) => {
+      const lowerTerm = term.toLowerCase()
+      return (
+        item.contactName.toLowerCase().includes(lowerTerm) ||
+        item.contactNumber.toString().toLowerCase().includes(lowerTerm) ||
+        item.contactEmail.toLowerCase().includes(lowerTerm)
+      )
+    })
   }
 
   return (
