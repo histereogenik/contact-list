@@ -59,11 +59,36 @@ const contactsSlice = createSlice({
       state.items = state.items.map((c) =>
         c.id === action.payload ? { ...c, favorite: !c.favorite } : c
       )
+    },
+    createContact: (state, action: PayloadAction<ContactClass>) => {
+      const doesNameExist = state.items.find(
+        (c) =>
+          c.contactName.toLowerCase() ===
+          action.payload.contactName.toLowerCase()
+      )
+      const doesNumberExist = state.items.find(
+        (c) => c.contactNumber === action.payload.contactNumber
+      )
+      const doesEmailExist = state.items.find(
+        (c) =>
+          c.contactEmail.toLowerCase() ===
+          action.payload.contactEmail.toLowerCase()
+      )
+
+      if (doesNameExist) {
+        alert('There is already a contact with this Name')
+      } else if (doesNumberExist) {
+        alert('There is already a contact with this Number')
+      } else if (doesEmailExist) {
+        alert('There is already a contact with this Email')
+      } else {
+        state.items.push(action.payload)
+      }
     }
   }
 })
 
-export const { deleteContact, editContact, toggleFavorite } =
+export const { deleteContact, editContact, toggleFavorite, createContact } =
   contactsSlice.actions
 
 export default contactsSlice.reducer
