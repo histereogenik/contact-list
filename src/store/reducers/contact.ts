@@ -61,29 +61,7 @@ const contactsSlice = createSlice({
       )
     },
     createContact: (state, action: PayloadAction<ContactClass>) => {
-      const doesNameExist = state.items.find(
-        (c) =>
-          c.contactName.toLowerCase() ===
-          action.payload.contactName.toLowerCase()
-      )
-      const doesNumberExist = state.items.find(
-        (c) => c.contactNumber === action.payload.contactNumber
-      )
-      const doesEmailExist = state.items.find(
-        (c) =>
-          c.contactEmail.toLowerCase() ===
-          action.payload.contactEmail.toLowerCase()
-      )
-
-      if (doesNameExist) {
-        alert('There is already a contact with this Name')
-      } else if (doesNumberExist) {
-        alert('There is already a contact with this Number')
-      } else if (doesEmailExist) {
-        alert('There is already a contact with this Email')
-      } else {
-        state.items.push(action.payload)
-      }
+      state.items.push(action.payload)
     }
   }
 })

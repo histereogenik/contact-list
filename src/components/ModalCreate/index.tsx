@@ -1,13 +1,14 @@
-import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { editContact } from '../../store/reducers/contact'
+import { createContact } from '../../store/reducers/contact'
 
 import * as enums from '../../utils/enums/LabelEnum'
 import ContactClass from '../../models/ContactClass'
 
 import { Button, Modal, ModalProps, Form } from 'react-bootstrap'
 import { LabelContainer, MyForm } from './styles'
+import { RootReducer } from '../../store'
 
 type ModalCreateProps = {
   onHide: () => void
@@ -23,6 +24,17 @@ const ModalCreate: React.FC<ModalProps & ModalCreateProps> = ({
   const [newEmail, setNewEmail] = useState('')
   const [newLabel, setNewLabel] = useState('')
   const [newFavorite, setNewFavorite] = useState(false)
+  const { items } = useSelector((state: RootReducer) => state.contacts)
+
+  useEffect(() => {
+    if (!modalProps.show) {
+      setNewName('')
+      setNewNumber('')
+      setNewEmail('')
+      setNewLabel('')
+      setNewFavorite(false)
+    }
+  }, [modalProps.show])
 
   const handleCreate = () => {
     const newContact = new ContactClass(
@@ -33,9 +45,29 @@ const ModalCreate: React.FC<ModalProps & ModalCreateProps> = ({
       newFavorite,
       9
     )
-    dispatch(editContact(newContact))
 
-    onHide()
+    const doesNameExist = items.find(
+      (c) =>
+        c.contactName.toLowerCase() === newContact.contactName.toLowerCase()
+    )
+    const doesNumberExist = items.find(
+      (c) => c.contactNumber === newContact.contactNumber
+    )
+    const doesEmailExist = items.find(
+      (c) =>
+        c.contactEmail.toLowerCase() === newContact.contactEmail.toLowerCase()
+    )
+
+    if (doesNameExist) {
+      alert('There is already a contact with this Name')
+    } else if (doesNumberExist) {
+      alert('There is already a contact with this Number')
+    } else if (doesEmailExist) {
+      alert('There is already a contact with this Email')
+    } else {
+      dispatch(createContact(newContact))
+      onHide()
+    }
   }
 
   return (
