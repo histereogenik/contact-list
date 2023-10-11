@@ -1,3 +1,5 @@
+import * as enums from '../../utils/enums/LabelEnum'
+
 import * as S from './styles'
 import * as Icon from 'react-bootstrap-icons'
 import FilterCard from '../../components/FilterCard'
@@ -16,10 +18,30 @@ const Sidebar = () => {
           </div>
         </S.AddContact>
         <S.Filters>
-          <FilterCard label="Contacts" counter={4} />
-          <FilterCard label="Favorites" counter={4} />
-          <FilterCard label="Work" counter={4} />
-          <FilterCard label="Family" counter={4} active />
+          <FilterCard
+            value={enums.LabelEnum.ANY}
+            criteria="all"
+            label="Contacts"
+            counter={4}
+          />
+          <FilterCard
+            value={enums.LabelEnum.FAVORITE}
+            criteria="favorite"
+            label="Favorites"
+            counter={4}
+          />
+          <FilterCard
+            value={enums.LabelEnum.WORK}
+            criteria="label"
+            label="Work"
+            counter={4}
+          />
+          <FilterCard
+            value={enums.LabelEnum.FAMILY}
+            criteria="label"
+            label="Family"
+            counter={4}
+          />
         </S.Filters>
       </div>
     </S.Aside>

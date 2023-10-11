@@ -11,7 +11,9 @@ import * as Icon from 'react-bootstrap-icons'
 const ContactList = () => {
   const dispatch = useDispatch()
   const { items } = useSelector((state: RootReducer) => state.contacts)
-  const { term } = useSelector((state: RootReducer) => state.filter)
+  const { term, criteria, value } = useSelector(
+    (state: RootReducer) => state.filter
+  )
 
   const searchIcon = <Icon.Search />
 
@@ -20,15 +22,32 @@ const ContactList = () => {
     dispatch(deleteContact(contactID))
   }
 
-  const filterContacts = () => {
-    return items.filter((item) => {
-      const lowerTerm = term.toLowerCase()
-      return (
-        item.contactName.toLowerCase().includes(lowerTerm) ||
-        item.contactNumber.toString().toLowerCase().includes(lowerTerm) ||
-        item.contactEmail.toLowerCase().includes(lowerTerm)
-      )
-    })
+  const searchFilterContacts = () => {
+    let filteredContacts = items
+
+    if (term) {
+      filteredContacts = filteredContacts.filter((item) => {
+        const lowerTerm = term.toLowerCase()
+        return (
+          item.contactName.toLowerCase().includes(lowerTerm) ||
+          item.contactNumber.toString().toLowerCase().includes(lowerTerm) ||
+          item.contactEmail.toLowerCase().includes(lowerTerm)
+        )
+      })
+
+      if (criteria === 'favorite') {
+        filteredContacts = filteredContacts.filter(
+          (item) => item.favorite === value
+        )
+      } else if (criteria === 'label') {
+        filteredContacts = filteredContacts.filter(
+          (item) => item.label === value
+        )
+      }
+      return filteredContacts
+    } else {
+      return items
+    }
   }
 
   return (
@@ -42,6 +61,11 @@ const ContactList = () => {
           onChange={(e) => dispatch(changeTerm(e.target.value))}
         ></S.Search>
       </S.SearchContainer>
+      <ul>
+        <li>{term}</li>
+        <li>{criteria}</li>
+        <li>{value}</li>
+      </ul>
       <S.Table hover>
         <thead>
           <tr>
@@ -52,7 +76,7 @@ const ContactList = () => {
           </tr>
         </thead>
         <tbody>
-          {filterContacts().map((contact) => (
+          {searchFilterContacts().map((contact) => (
             <SavedContact
               key={contact.contactNumber}
               contactName={contact.contactName}

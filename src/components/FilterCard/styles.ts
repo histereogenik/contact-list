@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-
 import variables from '../../styles/variables'
-import { Props } from '.'
 
-type ActiveProp = Omit<Props, 'counter' | 'label'>
+type Props = {
+  active: boolean
+}
 
-export const Card = styled.div<ActiveProp>`
+export const Card = styled.div<Props>`
   padding: 8px;
   font-weight: bold;
   font-size: 14px;
@@ -13,6 +13,7 @@ export const Card = styled.div<ActiveProp>`
   justify-content: space-between;
   align-items: center;
   border-radius: 16px;
+  cursor: pointer;
   background-color: ${(props) =>
     props.active ? variables.lightGray : variables.white};
   div {

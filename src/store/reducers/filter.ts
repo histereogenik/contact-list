@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import * as enums from '../../utils/enums/LabelEnum'
 
 type FilterState = {
-  term: string
+  term?: string
   criteria: 'label' | 'favorite' | 'all'
   value?: enums.LabelEnum | boolean
 }
