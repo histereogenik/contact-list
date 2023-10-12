@@ -5,6 +5,18 @@ export const Aside = styled.aside`
   padding: 16px;
   height: 100vh;
   display: block;
+
+  @media (max-width: 767px) {
+    height: auto;
+  }
+`
+export const HeadContainer = styled.div`
+  @media (max-width: 767px) {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 12px;
+  }
 `
 export const AppName = styled.div`
   display: flex;
@@ -16,6 +28,14 @@ export const AppName = styled.div`
 
   span {
     color: ${variables.darkGray};
+  }
+
+  @media (max-width: 767px) {
+    margin-bottom: 0;
+
+    span {
+      margin-left: 8px;
+    }
   }
 `
 export const AddContact = styled.button`
@@ -46,4 +66,13 @@ export const AddContact = styled.button`
 `
 export const Filters = styled.div`
   margin-top: 16px;
+`
+export const Burger = styled.button`
+  padding: 4px 8px;
+  margin-right: 32px;
+  background: transparent;
+  border-radius: 8px;
+  border: 1px solid ${variables.lightGray};
+  box-shadow: 5px 3px 5px rgba(0, 0, 0, 0.2);
+  transition: 0.3s ease;
 `

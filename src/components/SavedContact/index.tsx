@@ -63,10 +63,10 @@ const SavedContact = ({
   return (
     <>
       <S.ContactContainer>
-        <td className="name-padding">{contactName}</td>
-        <td>{contactNumber}</td>
-        <td>{contactEmail}</td>
-        <td>
+        <S.Td className="name-padding">{contactName}</S.Td>
+        <S.Td className="number-column">{contactNumber}</S.Td>
+        <S.Td className="email-column">{contactEmail}</S.Td>
+        <S.Td>
           <S.ManagerContainer>
             <S.FavoriteButton
               className={isFavorite ? 'star-filled' : ''}
@@ -100,7 +100,7 @@ const SavedContact = ({
               onDelete={onDelete}
             />
           </S.ManagerContainer>
-        </td>
+        </S.Td>
       </S.ContactContainer>
     </>
   )

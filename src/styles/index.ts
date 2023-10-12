@@ -15,6 +15,11 @@ export const Container = styled.div`
   display: grid;
   grid-template-columns: 224px auto;
   background-color: ${variables.white};
+
+  @media (max-width: 767px) {
+    display: block;
+    padding: 0.5em;
+  }
 `
 export const MainContainer = styled.main`
   padding: 0 40px;

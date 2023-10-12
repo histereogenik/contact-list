@@ -64,8 +64,8 @@ const ContactList = () => {
         <thead>
           <tr>
             <th>Name</th>
-            <th>Phone Number</th>
-            <th>E-mail</th>
+            <th className="number-column">Phone Number</th>
+            <th className="email-column">E-mail</th>
             <th></th>
           </tr>
         </thead>
