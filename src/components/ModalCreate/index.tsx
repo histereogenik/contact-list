@@ -18,12 +18,13 @@ const ModalCreate: React.FC<ModalProps & ModalCreateProps> = ({
   onHide,
   ...modalProps
 }) => {
-  const dispatch = useDispatch()
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newEmail, setNewEmail] = useState('')
   const [newLabel, setNewLabel] = useState('')
   const [newFavorite, setNewFavorite] = useState(false)
+
+  const dispatch = useDispatch()
   const { items } = useSelector((state: RootReducer) => state.contacts)
 
   useEffect(() => {
@@ -36,37 +37,42 @@ const ModalCreate: React.FC<ModalProps & ModalCreateProps> = ({
     }
   }, [modalProps.show])
 
+  const isValidEmail = (email: string) => {
+    const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
+    return emailPattern.test(email)
+  }
+
   const handleCreate = () => {
-    const newContact = new ContactClass(
-      newName,
-      parseInt(newNumber),
-      newEmail,
-      newLabel,
-      newFavorite,
-      9
-    )
-
-    const doesNameExist = items.find(
-      (c) =>
-        c.contactName.toLowerCase() === newContact.contactName.toLowerCase()
-    )
-    const doesNumberExist = items.find(
-      (c) => c.contactNumber === newContact.contactNumber
-    )
-    const doesEmailExist = items.find(
-      (c) =>
-        c.contactEmail.toLowerCase() === newContact.contactEmail.toLowerCase()
-    )
-
-    if (doesNameExist) {
-      alert('There is already a contact with this Name')
-    } else if (doesNumberExist) {
-      alert('There is already a contact with this Number')
-    } else if (doesEmailExist) {
-      alert('There is already a contact with this Email')
+    if (newName.trim() === '' || newNumber.trim() === '') {
+      alert('Name and Phone Number are required.')
+    } else if (newEmail.trim() !== '' && !isValidEmail(newEmail)) {
+      alert('Please enter a valid email address.')
     } else {
-      dispatch(createContact(newContact))
-      onHide()
+      const newContact = new ContactClass(
+        newName,
+        parseInt(newNumber),
+        newEmail,
+        newLabel,
+        newFavorite,
+        9
+      )
+
+      const doesNameExist = items.find(
+        (c) =>
+          c.contactName.toLowerCase() === newContact.contactName.toLowerCase()
+      )
+      const doesNumberExist = items.find(
+        (c) => c.contactNumber === newContact.contactNumber
+      )
+
+      if (doesNameExist) {
+        alert('There is already a contact with this Name')
+      } else if (doesNumberExist) {
+        alert('There is already a contact with this Number')
+      } else {
+        dispatch(createContact(newContact))
+        onHide()
+      }
     }
   }
 

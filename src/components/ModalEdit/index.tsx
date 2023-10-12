@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { editContact } from '../../store/reducers/contact'
+import { RootReducer } from '../../store'
 
 import * as enums from '../../utils/enums/LabelEnum'
 import ContactClass from '../../models/ContactClass'
@@ -29,12 +30,14 @@ const ModalEdit: React.FC<ModalProps & ModalEditProps> = ({
   id,
   ...modalProps
 }) => {
-  const dispatch = useDispatch()
   const [newName, setNewName] = useState(contactName)
   const [newNumber, setNewNumber] = useState(contactNumber.toString())
   const [newEmail, setNewEmail] = useState(contactEmail)
   const [newLabel, setNewLabel] = useState(label)
   const [newFavorite, setNewFavorite] = useState(favorite)
+
+  const dispatch = useDispatch()
+  const { items } = useSelector((state: RootReducer) => state.contacts)
 
   useEffect(() => {
     if (!modalProps.show) {
@@ -53,18 +56,47 @@ const ModalEdit: React.FC<ModalProps & ModalEditProps> = ({
     favorite
   ])
 
-  const handleSave = () => {
-    const editedContact = new ContactClass(
-      newName,
-      parseInt(newNumber),
-      newEmail,
-      newLabel,
-      newFavorite,
-      id
-    )
-    dispatch(editContact(editedContact))
+  const isValidEmail = (email: string) => {
+    const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
+    return emailPattern.test(email)
+  }
 
-    onHide()
+  const handleSave = () => {
+    if (newName.trim() === '' || newNumber.trim() === '') {
+      alert('Name and Phone Number are required.')
+    } else if (newEmail.trim() !== '' && !isValidEmail(newEmail)) {
+      alert('Please enter a valid email address.')
+    } else {
+      const editedContact = new ContactClass(
+        newName,
+        parseInt(newNumber),
+        newEmail,
+        newLabel,
+        newFavorite,
+        id
+      )
+
+      const doesNameExist = items.find(
+        (c) =>
+          c.contactName.toLowerCase() ===
+          editedContact.contactName.toLowerCase()
+      )
+      const doesNumberExist = items.find(
+        (c) => c.contactNumber === editedContact.contactNumber
+      )
+
+      const isSameIdName = doesNameExist?.id === editedContact.id
+      const isSameIdNumber = doesNumberExist?.id === editedContact.id
+
+      if (doesNameExist && !isSameIdName) {
+        alert('There is already a contact with this Name')
+      } else if (doesNumberExist && !isSameIdNumber) {
+        alert('There is already a contact with this Number')
+      } else {
+        dispatch(editContact(editedContact))
+        onHide()
+      }
+    }
   }
 
   return (
