@@ -90,7 +90,7 @@ const ModalCreate: React.FC<ModalProps & ModalCreateProps> = ({
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
+      <Modal.Header closeButton={false}>
         <Modal.Title id="contained-modal-title-vcenter">
           Creating New Contact
         </Modal.Title>

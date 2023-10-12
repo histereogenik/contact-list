@@ -105,7 +105,7 @@ const ModalEdit: React.FC<ModalProps & ModalEditProps> = ({
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
+      <Modal.Header closeButton={false}>
         <Modal.Title id="contained-modal-title-vcenter">
           Editing Contact
         </Modal.Title>

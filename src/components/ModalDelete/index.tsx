@@ -22,7 +22,7 @@ const ModalDelete: React.FC<ModalProps & ModalDeleteProps> = ({
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
+      <Modal.Header closeButton={false}>
         <Modal.Title id="contained-modal-title-vcenter">
           Deleting Contact
         </Modal.Title>
