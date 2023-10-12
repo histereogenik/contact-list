@@ -19,10 +19,7 @@ const FilterCard = ({ label, criteria, value }: Props) => {
   const { filter, contacts } = useSelector((state: RootReducer) => state)
 
   const verifyIfActive = () => {
-    const sameCriteria = filter.criteria === criteria
-    const sameValue = filter.value === value
-
-    return sameCriteria && sameValue
+    return filter.criteria === criteria && filter.value === value
   }
 
   const countContacts = () => {
@@ -46,7 +43,7 @@ const FilterCard = ({ label, criteria, value }: Props) => {
   }
 
   const counterHandler = countContacts()
-  const isActive = verifyIfActive()
+  const isActive = verifyIfActive() ? 'true' : 'false'
 
   return (
     <S.Card active={isActive} onClick={filterContacts}>

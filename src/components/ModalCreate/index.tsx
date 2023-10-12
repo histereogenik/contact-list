@@ -54,7 +54,7 @@ const ModalCreate: React.FC<ModalProps & ModalCreateProps> = ({
         newEmail,
         newLabel,
         newFavorite,
-        9
+        1
       )
 
       const doesNameExist = items.find(
@@ -70,7 +70,15 @@ const ModalCreate: React.FC<ModalProps & ModalCreateProps> = ({
       } else if (doesNumberExist) {
         alert('There is already a contact with this Number')
       } else {
-        dispatch(createContact(newContact))
+        dispatch(
+          createContact({
+            contactName: newName,
+            contactNumber: parseInt(newNumber),
+            contactEmail: newEmail,
+            label: newLabel,
+            favorite: newFavorite
+          })
+        )
         onHide()
       }
     }

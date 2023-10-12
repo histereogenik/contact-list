@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import variables from '../../styles/variables'
 
 type Props = {
-  active: boolean
+  active: string
 }
 
 export const Card = styled.div<Props>`
@@ -15,7 +15,7 @@ export const Card = styled.div<Props>`
   border-radius: 16px;
   cursor: pointer;
   background-color: ${(props) =>
-    props.active ? variables.lightGray : variables.white};
+    props.active === 'true' ? variables.lightGray : variables.white};
   div {
     display: flex;
     align-items: center;

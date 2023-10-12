@@ -60,8 +60,14 @@ const contactsSlice = createSlice({
         c.id === action.payload ? { ...c, favorite: !c.favorite } : c
       )
     },
-    createContact: (state, action: PayloadAction<ContactClass>) => {
-      state.items.push(action.payload)
+    createContact: (state, action: PayloadAction<Omit<ContactClass, 'id'>>) => {
+      const lastContact = state.items[state.items.length - 1]
+
+      const newContact = {
+        ...action.payload,
+        id: lastContact ? lastContact.id + 1 : 1
+      }
+      state.items.push(newContact)
     }
   }
 })
