@@ -20,6 +20,10 @@ export const ManagerContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
+
+  @media (min-width: 1024px) {
+    padding: 0 25%;
+  }
 `
 export const ManagerButton = styled.button`
   background: transparent;

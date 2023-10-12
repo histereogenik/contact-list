@@ -66,7 +66,7 @@ const SavedContact = ({
         <S.Td className="name-padding">{contactName}</S.Td>
         <S.Td className="number-column">{contactNumber}</S.Td>
         <S.Td className="email-column">{contactEmail}</S.Td>
-        <S.Td>
+        <S.Td className="managers">
           <S.ManagerContainer>
             <S.FavoriteButton
               className={isFavorite ? 'star-filled' : ''}

@@ -61,7 +61,7 @@ export const Table = styled(ReactTable)`
   .email-column {
     display: table-cell;
 
-    @media (max-width: 1024px) {
+    @media (max-width: 1023px) {
       display: none;
     }
   }
