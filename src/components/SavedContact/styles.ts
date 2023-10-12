@@ -10,7 +10,6 @@ export const ContactContainer = styled.tr`
   }
 `
 export const Td = styled.td`
-  padding: 8px 0 !important;
   vertical-align: middle;
   white-space: nowrap;
   overflow: hidden;
